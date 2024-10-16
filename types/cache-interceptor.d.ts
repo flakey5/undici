@@ -23,11 +23,6 @@ declare namespace CacheHandler {
    * Underlying storage provider for cached responses
    */
   export interface CacheStore {
-    /**
-     * Whether or not the cache is full and can not store any more responses
-     */
-    get isFull(): boolean
-
     createReadStream(req: Dispatcher.RequestOptions): CacheStoreReadable | Promise<CacheStoreReadable | undefined> | undefined
 
     createWriteStream(req: Dispatcher.RequestOptions, value: Omit<CacheStoreValue, 'rawTrailers'>): CacheStoreWriteable | undefined
@@ -85,8 +80,6 @@ declare namespace CacheHandler {
 
   export class MemoryCacheStore implements CacheStore {
     constructor (opts?: MemoryCacheStoreOpts)
-
-    get isFull (): boolean
 
     createReadStream (req: Dispatcher.RequestOptions): CacheStoreReadable | undefined
 
