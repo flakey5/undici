@@ -8,9 +8,11 @@ declare namespace CacheHandler {
   export interface CacheHandlerOptions {
     store: CacheStore
 
-    cacheByDefault?: number
+    cacheByDefault: number
 
-    type?: CacheOptions['type']
+    type: CacheOptions['type']
+
+    statusCodes: number[] | true
   }
 
   export interface CacheOptions {
@@ -34,10 +36,16 @@ declare namespace CacheHandler {
     cacheByDefault?: number
 
     /**
-     * TODO docs
+     * The type of cache for Undici to act as. Can be `shared` or `private`. Default `shared`.
      * @default 'shared'
      */
     type?: 'shared' | 'private'
+
+    /**
+     * The status codes for Undici to cache. Can be `true` to cache all status codes. Default is `[200, 307]`.
+     * @default [200, 307]
+     */
+    statusCodes?: number[] | true
   }
 
   export interface CacheControlDirectives {
@@ -110,8 +118,8 @@ declare namespace CacheHandler {
 
   export interface MemoryCacheStoreOpts {
     /**
-       * @default Infinity
-       */
+     * @default Infinity
+     */
     maxCount?: number
 
     /**

@@ -53,7 +53,7 @@ const CLI_OPTIONS = parseArgs({
  * @type {TestEnvironment}
  */
 const BASE_TEST_ENVIRONMENT = {
-  opts: { methods: ['GET', 'HEAD'] },
+  opts: { methods: ['GET', 'HEAD'], statusCodes: true },
   ignoredTests: [
     // Tests for invalid etags, goes against the spec
     'conditional-etag-forward-unquoted',

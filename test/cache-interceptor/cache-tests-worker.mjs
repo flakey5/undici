@@ -8,6 +8,16 @@ import tests from '../fixtures/cache-tests/tests/index.mjs'
 import { Agent, fetch, interceptors, setGlobalDispatcher } from '../../index.js'
 import MemoryCacheStore from '../../lib/cache/memory-cache-store.js'
 
+const FLAKY_TESTS = [
+  'other-age-gen',
+  'other-age-update-expires',
+  'other-age-update-max-age',
+
+  'heuristic-delta-5',
+  'heuristic-delta-10',
+  'heuristic-delta-30'
+]
+
 if (!process.env.TEST_ENVIRONMENT) {
   throw new Error('missing TEST_ENVIRONMENT')
 }
@@ -53,13 +63,11 @@ setGlobalDispatcher(client)
 // Run the suite
 await runTestSuite(tests, fetch, true, process.env.BASE_URL)
 
-let exitCode = 0
-
 // Print the results
 const stats = printResults(environment, getResults())
 printStats(stats)
 
-exit(exitCode)
+exit(stats.failed === 0 ? 0 : 1)
 
 /**
  * @param {import('./cache-tests.mjs').TestEnvironment['cacheStore']} type
@@ -134,7 +142,6 @@ function printResults (environment, results) {
         status = 'failed'
         color = 'red'
         stats.failed++
-        exitCode = 1
         break
       case '\uf05a':
         status = 'failed (optional)'
@@ -175,6 +182,10 @@ function printResults (environment, results) {
         status = 'unknown'
         color = ['strikethrough', 'white']
         break
+    }
+
+    if (FLAKY_TESTS.includes(test.id)) {
+      status += ' (flaky)'
     }
 
     if (process.env.CI && status !== 'failed') {

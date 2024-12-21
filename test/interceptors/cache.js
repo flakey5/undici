@@ -658,6 +658,45 @@ describe('Cache Interceptor', () => {
     }
   })
 
+  test('ranged requests aren\'t cached', async () => {
+    let requestsToOrigin = 0
+    const server = createServer((_, res) => {
+      requestsToOrigin++
+      res.statusCode = 206
+      res.end('asd')
+    }).listen(0)
+
+    const client = new Client(`http://localhost:${server.address().port}`)
+      .compose(interceptors.cache())
+
+    after(async () => {
+      server.close()
+      await client.close()
+    })
+
+    await once(server, 'listening')
+
+    strictEqual(requestsToOrigin, 0)
+
+    /**
+     * @type {import('../../types/dispatcher').default.RequestOptions}
+     */
+    const request = {
+      origin: 'localhost',
+      method: 'GET',
+      path: '/',
+      headers: {
+        range: 'bytes=0-10'
+      }
+    }
+
+    await client.request(request)
+    equal(requestsToOrigin, 1)
+
+    await client.request(request)
+    equal(requestsToOrigin, 2)
+  })
+
   describe('Client-side directives', () => {
     test('max-age', async () => {
       const clock = FakeTimers.install({
