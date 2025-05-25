@@ -18,7 +18,9 @@ function makeStaleCheckCC (cc, sharedOnly, value) {
       },
       {
         disconnect: true,
-        expected_type: 'not_cached'
+        expected_status: null,
+        check_body: false,
+        expected_response_headers_missing: ['server-request-count']
       }
     ]
   }
@@ -92,6 +94,10 @@ export default {
         {
           setup: true,
           pause_after: true,
+          response_headers: [
+            ['Cache-Control', 'no-cache', false],
+            ['ETag', '"def"', false]
+          ],
           expected_type: 'cached'
         },
         {

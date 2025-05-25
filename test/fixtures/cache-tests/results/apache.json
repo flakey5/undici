@@ -100,7 +100,7 @@
   "cdn-date-update-exceed": true,
   "cdn-expires-update-exceed": [
     "Assertion",
-    "Response 2 header Expires is \"null\", not \"Tue, 21 Jan 2025 00:20:15 GMT\""
+    "Response 2 header Expires is \"null\", not \"Sat, 24 May 2025 02:02:37 GMT\""
   ],
   "cdn-fresh-cc-nostore": [
     "Assertion",
@@ -340,10 +340,7 @@
   "headers-store-Cache-Control": true,
   "headers-store-Clear-Site-Data": true,
   "headers-store-Connection": true,
-  "headers-store-Content-Encoding": [
-    "AbortError",
-    "This operation was aborted"
-  ],
+  "headers-store-Content-Encoding": true,
   "headers-store-Content-Foo": true,
   "headers-store-Content-Length": true,
   "headers-store-Content-Location": true,
@@ -426,6 +423,10 @@
   "heuristic-delta-60": true,
   "heuristic-delta-600": true,
   "heuristic-delta-86400": true,
+  "interim-102": true,
+  "interim-103": true,
+  "interim-no-header-reuse": true,
+  "interim-not-cached": true,
   "invalidate-DELETE": true,
   "invalidate-DELETE-cl": [
     "Assertion",
@@ -496,11 +497,11 @@
   "other-cookie": true,
   "other-date-update": [
     "Assertion",
-    "Response 2 header Date is \"Tue, 21 Jan 2025 00:20:09 GMT\", not \"Tue, 21 Jan 2025 00:20:06 GMT\""
+    "Response 2 header Date is \"Sat, 24 May 2025 02:02:31 GMT\", not \"Sat, 24 May 2025 02:02:28 GMT\""
   ],
   "other-date-update-expires": [
     "Assertion",
-    "Response 2 header Date is \"Tue, 21 Jan 2025 00:20:09 GMT\", not \"Tue, 21 Jan 2025 00:20:06 GMT\""
+    "Response 2 header Date is \"Sat, 24 May 2025 02:02:31 GMT\", not \"Sat, 24 May 2025 02:02:28 GMT\""
   ],
   "other-date-update-expires-update": true,
   "other-fresh-content-disposition-attachment": true,
@@ -560,13 +561,10 @@
     "TypeError",
     "fetch failed"
   ],
-  "stale-close-proxy-revalidate": [
+  "stale-close-proxy-revalidate": true,
+  "stale-close-s-maxage=2": [
     "TypeError",
     "fetch failed"
-  ],
-  "stale-close-s-maxage=2": [
-    "AbortError",
-    "This operation was aborted"
   ],
   "stale-sie-503": [
     "TypeError",

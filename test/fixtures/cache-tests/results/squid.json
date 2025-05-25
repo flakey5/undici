@@ -91,7 +91,7 @@
   "cdn-date-update-exceed": true,
   "cdn-expires-update-exceed": [
     "Assertion",
-    "Response 2 header Expires is \"null\", not \"Tue, 21 Jan 2025 00:17:30 GMT\""
+    "Response 2 header Expires is \"null\", not \"Sat, 24 May 2025 02:00:04 GMT\""
   ],
   "cdn-fresh-cc-nostore": [
     "Assertion",
@@ -435,6 +435,10 @@
   "heuristic-delta-60": true,
   "heuristic-delta-600": true,
   "heuristic-delta-86400": true,
+  "interim-102": true,
+  "interim-103": true,
+  "interim-no-header-reuse": true,
+  "interim-not-cached": true,
   "invalidate-DELETE": true,
   "invalidate-DELETE-cl": true,
   "invalidate-DELETE-failed": true,
@@ -450,7 +454,10 @@
   "invalidate-POST-cl": true,
   "invalidate-POST-failed": true,
   "invalidate-POST-location": true,
-  "invalidate-PUT": true,
+  "invalidate-PUT": [
+    "Setup",
+    "Response 1 status is 409, not 200"
+  ],
   "invalidate-PUT-cl": true,
   "invalidate-PUT-failed": true,
   "invalidate-PUT-location": true,
@@ -528,22 +535,10 @@
   "query-args-same": true,
   "stale-503": true,
   "stale-close": true,
-  "stale-close-must-revalidate": [
-    "Assertion",
-    "Response 2 comes from cache"
-  ],
-  "stale-close-no-cache": [
-    "Assertion",
-    "Response 2 comes from cache"
-  ],
-  "stale-close-proxy-revalidate": [
-    "Assertion",
-    "Response 2 comes from cache"
-  ],
-  "stale-close-s-maxage=2": [
-    "Assertion",
-    "Response 2 comes from cache"
-  ],
+  "stale-close-must-revalidate": true,
+  "stale-close-no-cache": true,
+  "stale-close-proxy-revalidate": true,
+  "stale-close-s-maxage=2": true,
   "stale-sie-503": true,
   "stale-sie-close": true,
   "stale-warning-become": [
